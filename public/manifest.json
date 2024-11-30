@@ -21,7 +21,7 @@
   "lang": "en-GB",
   "name": "Ecommerce PWA",
   "short_name": "Ecommerce PWA",
-  "start_url": "http://localhost:3000/",
-  "scope": "http://localhost:3000/",
+  "start_url": "https://ecommerce-mu-lake-16.vercel.app/",
+  "scope": "https://ecommerce-mu-lake-16.vercel.app/",
   "description": "This is my pwa FOR Ecommerce"
 }

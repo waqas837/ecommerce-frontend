@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-
 import "../public/scss/main.scss";
 import "photoswipe/dist/photoswipe.css";
 import "rc-slider/assets/index.css";
@@ -33,6 +32,7 @@ import RtlToggle from "@/components/common/RtlToggle";
 
 export default function RootLayout({ children }) {
   const pathname = usePathname();
+  const isAdminRoute = pathname.startsWith("/admin");
   useEffect(() => {
     if (typeof window !== "undefined") {
       // Import the script only on the client side
@@ -182,10 +182,9 @@ export default function RootLayout({ children }) {
           <Register />
           <ResetPass />
           <SearchModal />
-          <ToolbarBottom />
-          <ToolbarShop />
-          <NewsletterModal />
-          <ShareModal />{" "}
+          {!isAdminRoute && <ToolbarBottom />}
+          {/* <NewsletterModal /> */}
+          <ShareModal />
         </Context>
         <ScrollTop />
       </body>

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation"; // Import useRouter from Next.js
 import axios from "axios";
 import { Trash, Edit2 } from "lucide-react";
- import Link from "next/link";
+import Link from "next/link";
 import { apiUrl } from "@/lib/apiUrl";
 import { getMediaUrlPath } from "@/lib/mediaUrl";
 
@@ -190,7 +190,7 @@ const Posts = () => {
               </Link>
 
               {/* Action buttons */}
-              <div className="absolute right-2 top-2 flex space-x-2 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+              <div className="absolute right-2 top-2 flex space-x-2">
                 <button
                   onClick={() => handleDelete(post.slug)}
                   className="flex items-center justify-center rounded-full bg-gray-200 p-2 transition-colors duration-200 hover:bg-red-500"

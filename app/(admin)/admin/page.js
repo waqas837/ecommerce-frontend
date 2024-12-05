@@ -15,11 +15,6 @@ export default function AdminLogin() {
     e.preventDefault();
     try {
       toast.loading("Processing");
-      setTimeout(() => {
-        toast.dismiss();
-        router.push("/dashboard/home");
-      }, 2000);
-      return;
       let { data } = await axios.post(`${apiUrl}/admin/signin`, {
         email,
         password,

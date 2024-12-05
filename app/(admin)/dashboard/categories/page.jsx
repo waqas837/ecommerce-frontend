@@ -80,14 +80,14 @@ const Categories = () => {
                         >
                             <input
                                 type="text"
-                                className="flex-1 px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                                className="flex-1 px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:border-pink-500 focus:ring-1 focus:ring-pink-500"
                                 placeholder="Add new category"
                                 value={newCategory}
                                 onChange={(e) => setNewCategory(e.target.value)}
                                 required
                             />
                             <button
-                                className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded hover:bg-blue-700 transition-colors duration-150"
+                                className="px-4 py-2 bg-pink-600 text-white text-sm font-medium rounded hover:bg-pink-700 transition-colors duration-150"
                             >
                                 Add
                             </button>

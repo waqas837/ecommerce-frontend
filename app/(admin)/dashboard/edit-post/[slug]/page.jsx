@@ -36,8 +36,7 @@ const EditPostPage = () => {
   const [keywords, setKeywords] = useState("");
   const [author, setAuthor] = useState("");
   const [ReadTime, setReadTime] = useState(0);
-  const [editorState, setEditorState] =
-    useState < EditorState > EditorState.createEmpty();
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [mounted, setMounted] = useState(false);
   const [loading, setLoading] = useState(true);
 

@@ -150,7 +150,7 @@ const Gallery = () => {
       {/* Drag-and-drop area */}
       <div
         className={`mb-5 rounded-lg border-2 border-dashed p-10 text-center transition ${
-          dragOver ? "border-blue-500 bg-blue-100" : "border-gray-300"
+          dragOver ? "border-pink-500 bg-pink-100" : "border-gray-300"
         }`}
         onDrop={handleDrop}
         onDragOver={handleDragOver}
@@ -183,7 +183,7 @@ const Gallery = () => {
               key={index}
               className={`relative cursor-pointer overflow-hidden rounded-lg border-2 transition ${
                 selectedMedia.includes(file)
-                  ? "border-blue-500"
+                  ? "border-pink-500"
                   : "border-transparent"
               }`}
               onClick={() => handleSelectMedia(file)}
@@ -204,7 +204,7 @@ const Gallery = () => {
               )}
               {/* Selected indicator */}
               {showButton && selectedMedia.includes(file) && (
-                <span className="absolute right-2 top-2 rounded-full bg-blue-500 p-1 px-3 text-white">
+                <span className="absolute right-2 top-2 rounded-full bg-pink-500 p-1 px-3 text-white">
                   ✔
                 </span>
               )}
@@ -242,7 +242,7 @@ const Gallery = () => {
       {showButton && selectedMedia.length > 0 && (
         <button
           onClick={handleSaveSelection}
-          className="w-full rounded bg-blue-500 py-2 text-white transition hover:bg-blue-600"
+          className="w-full rounded bg-pink-500 py-2 text-white transition hover:bg-pink-600"
         >
           Save and Continue
         </button>

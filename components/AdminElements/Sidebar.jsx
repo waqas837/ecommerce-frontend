@@ -76,8 +76,8 @@ const Sidebar = ({ role }) => {
             stroke-width="1.5"
             stroke="currentColor"
             style={{
-              height: "1.5rem", // equivalent to h-6
-              width: "1.5rem", // equivalent to w-6
+              height: "1.5rem",
+              width: "1.5rem",
             }}
           >
             <path
@@ -89,15 +89,11 @@ const Sidebar = ({ role }) => {
         ),
         link: "/dashboard/analytics",
       },
-
       {
         name: "Create Post",
         icon: (
           <svg
-            style={{
-              height: "1.5rem", // equivalent to h-6
-              width: "1.5rem", // equivalent to w-6
-            }}
+            className="h-6 w-6"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -125,6 +121,35 @@ const Sidebar = ({ role }) => {
           </svg>
         ),
         link: "/dashboard/create-post",
+      },
+
+      {
+        name: "Grocery Management",
+        icon: (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            style={{
+              height: "1.5rem",
+              width: "1.5rem",
+            }}
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 0 0 5.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 0 0 9.568 3Z"
+            />
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 6h.008v.008H6V6Z"
+            />
+          </svg>
+        ),
+        link: "/dashboard/products",
       },
 
       {
@@ -455,146 +480,6 @@ const Sidebar = ({ role }) => {
         link: "/dashboard/trash",
       },
     ],
-    superAdmin: [
-      {
-        name: "Dashboard",
-        icon: (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            style={{
-              height: "1.5rem", // equivalent to h-6
-              width: "1.5rem", // equivalent to w-6
-            }}
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
-            />
-          </svg>
-        ),
-        link: "/dashboard-main/home",
-      },
-
-      {
-        name: "User Management",
-        icon: (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="#ffffff"
-            className="bi bi-person-fill-gear"
-            viewBox="0 0 16 16"
-            id="Person-Fill-Gear--Streamline-Bootstrap"
-            height="16"
-            width="16"
-          >
-            <desc>
-              Person Fill Gear Streamline Icon: https://streamlinehq.com
-            </desc>
-            <path
-              d="M11 5a3 3 0 1 1 -6 0 3 3 0 0 1 6 0m-9 8c0 1 1 1 1 1h5.256A4.5 4.5 0 0 1 8 12.5a4.5 4.5 0 0 1 1.544 -3.393Q8.844 9.002 8 9c-5 0 -6 3 -6 4m9.886 -3.54c0.18 -0.613 1.048 -0.613 1.229 0l0.043 0.148a0.64 0.64 0 0 0 0.921 0.382l0.136 -0.074c0.561 -0.306 1.175 0.308 0.87 0.869l-0.075 0.136a0.64 0.64 0 0 0 0.382 0.92l0.149 0.045c0.612 0.18 0.612 1.048 0 1.229l-0.15 0.043a0.64 0.64 0 0 0 -0.38 0.921l0.074 0.136c0.305 0.561 -0.309 1.175 -0.87 0.87l-0.136 -0.075a0.64 0.64 0 0 0 -0.92 0.382l-0.045 0.149c-0.18 0.612 -1.048 0.612 -1.229 0l-0.043 -0.15a0.64 0.64 0 0 0 -0.921 -0.38l-0.136 0.074c-0.561 0.305 -1.175 -0.309 -0.87 -0.87l0.075 -0.136a0.64 0.64 0 0 0 -0.382 -0.92l-0.148 -0.045c-0.613 -0.18 -0.613 -1.048 0 -1.229l0.148 -0.043a0.64 0.64 0 0 0 0.382 -0.921l-0.074 -0.136c-0.306 -0.561 0.308 -1.175 0.869 -0.87l0.136 0.075a0.64 0.64 0 0 0 0.92 -0.382zM14 12.5a1.5 1.5 0 1 0 -3 0 1.5 1.5 0 0 0 3 0"
-              stroke-width="1"
-            ></path>
-          </svg>
-        ),
-        link: "/dashboard-main/user-management",
-      },
-
-      {
-        name: "Subscription Services",
-        icon: (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            id="Business-Deal-Cash-2--Streamline-Ultimate"
-            height="24"
-            width="24"
-          >
-            <desc>
-              Business Deal Cash 2 Streamline Icon: https://streamlinehq.com
-            </desc>
-            <path
-              stroke="#ffffff"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M10.1439 7.094c0.2162 0.28435 0.4978 0.51236 0.8209 0.66468 0.3231 0.15233 0.6782 0.22447 1.0351 0.21032 1.139 0 2.063 -0.693 2.063 -1.547s-0.922 -1.546 -2.063 -1.546 -2.05996 -0.693 -2.05996 -1.548c0 -0.855 0.92296 -1.547 2.05996 -1.547 0.3573 -0.01448 0.7128 0.05751 1.0363 0.20984 0.3234 0.15234 0.6053 0.38052 0.8217 0.66516"
-              stroke-width="1.5"
-            ></path>
-            <path
-              stroke="#ffffff"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M12.002 7.96899v1.031"
-              stroke-width="1.5"
-            ></path>
-            <path
-              stroke="#ffffff"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M12.002 0.75v1.031"
-              stroke-width="1.5"
-            ></path>
-            <path
-              stroke="#ffffff"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M1.50195 6.75c0 0.79565 0.31607 1.55871 0.87868 2.12132 0.56261 0.56261 1.32567 0.87868 2.12132 0.87868s1.55871 -0.31607 2.12132 -0.87868c0.56261 -0.56261 0.87868 -1.32567 0.87868 -2.12132s-0.31607 -1.55871 -0.87868 -2.12132C6.06066 4.06607 5.2976 3.75 4.50195 3.75s-1.55871 0.31607 -2.12132 0.87868c-0.56261 0.56261 -0.87868 1.32567 -0.87868 2.12132Z"
-              stroke-width="1.5"
-            ></path>
-            <path
-              stroke="#ffffff"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M8.25195 17.25V15c0 -0.9946 -0.39509 -1.9484 -1.09835 -2.6517 -0.70326 -0.7032 -1.65709 -1.0983 -2.65165 -1.0983 -0.99456 0 -1.94839 0.3951 -2.65165 1.0983C1.14704 13.0516 0.751953 14.0054 0.751953 15v2.25H2.25195l0.75 6h2.998l0.75 -6h1.502Z"
-              stroke-width="1.5"
-            ></path>
-            <path
-              stroke="#ffffff"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M16.502 6.75c0 0.79565 0.316 1.55871 0.8786 2.12132 0.5626 0.56261 1.3257 0.87868 2.1214 0.87868 0.7956 0 1.5587 -0.31607 2.1213 -0.87868 0.5626 -0.56261 0.8787 -1.32567 0.8787 -2.12132s-0.3161 -1.55871 -0.8787 -2.12132C21.0607 4.06607 20.2976 3.75 19.502 3.75c-0.7957 0 -1.5588 0.31607 -2.1214 0.87868S16.502 5.95435 16.502 6.75Z"
-              stroke-width="1.5"
-            ></path>
-            <path
-              stroke="#ffffff"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M23.252 17.25V15c0 -0.9946 -0.3951 -1.9484 -1.0984 -2.6517 -0.7033 -0.7032 -1.6571 -1.0983 -2.6516 -1.0983 -0.9946 0 -1.9484 0.3951 -2.6517 1.0983 -0.7033 0.7033 -1.0983 1.6571 -1.0983 2.6517v2.25h1.5l0.75 6h3l0.75 -6h1.5Z"
-              stroke-width="1.5"
-            ></path>
-          </svg>
-        ),
-        link: "/dashboard-main/subscribes-management",
-      },
-      {
-        name: "Packages Management",
-        icon: (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="#ffffff"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            style={{
-              height: "1.5rem", // equivalent to h-6
-              width: "1.5rem", // equivalent to w-6
-            }}
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M3 7.5h15c1.38 0 2.5 1.12 2.5 2.5v7c0 1.38-1.12 2.5-2.5 2.5H3c-1.38 0-2.5-1.12-2.5-2.5v-7c0-1.38 1.12-2.5 2.5-2.5zm2 3.5h8c.83 0 1.5-.67 1.5-1.5S13.83 8 13 8H5c-.83 0-1.5.67-1.5 1.5S4.17 11 5 11z"
-            />
-          </svg>
-        ),
-        link: "/dashboard-main/packages-management",
-      },
-    ],
   };
 
   return (
@@ -649,27 +534,17 @@ const Sidebar = ({ role }) => {
         </div>
 
         {/* Scrollable Navigation */}
-        <div style={{ flex: 1, overflowY: "auto" }}>
+        <div
+          className="scrollAreaAdmin"
+          style={{ flex: 1, overflowY: "auto", scrollbarWidth: "thin" }}
+        >
           <nav style={{ paddingLeft: "0.75rem", paddingRight: "0.75rem" }}>
             {SidebarRoleBased[role].map((item) => (
               <Link
                 key={item.name}
                 href={item.link}
-                style={{
-                  marginBottom: "0.5rem",
-                  display: "flex",
-                  alignItems: "center",
-                  padding: "0.75rem 1rem",
-                  borderRadius: "1rem",
-                  transition: "all 0.2s",
-                  color: role === "superAdmin" ? "#d1d5db" : "#1f2937",
-                  backgroundColor:
-                    role === "superAdmin" ? "transparent" : "transparent",
-                  boxShadow:
-                    role === "superAdmin"
-                      ? "0 4px 6px rgba(0, 0, 0, 0.2)"
-                      : "0 2px 4px rgba(0, 0, 0, 0.1)",
-                }}
+                className={`mb-2 flex items-center space-x-3 rounded-xl px-4 py-3 transition-all duration-200 
+                  ${"transform text-gray-600 hover:scale-105 hover:bg-white hover:bg-opacity-70 hover:text-pink-600 hover:shadow-md"}`}
                 onClick={() => LinkClick(item.link)}
               >
                 {item.icon}

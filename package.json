@@ -13,6 +13,8 @@
     "@google/model-viewer": "^3.5.0",
     "axios": "^1.7.8",
     "bootstrap": "^5.3.2",
+    "draft-js": "^0.11.7",
+    "draftjs-to-html": "^0.9.1",
     "drift-zoom": "^1.5.1",
     "lucide-react": "^0.462.0",
     "next": "14.2.7",
@@ -23,15 +25,22 @@
     "react-compare-slider": "^3.1.0",
     "react-countdown": "^2.3.6",
     "react-dom": "^18",
+    "react-draft-wysiwyg": "^1.15.0",
     "react-hot-toast": "^2.4.1",
     "react-image-zoom": "^1.3.1",
     "react-photoswipe-gallery": "^3.0.2",
+    "recharts": "^2.14.1",
     "sass": "^1.77.8",
     "sharp": "^0.33.5",
+    "slugify": "^1.6.6",
     "swiper": "^11.1.11",
     "wowjs": "^1.1.3"
   },
   "devDependencies": {
-    "@types/react": "^18.3.11"
+    "@types/react": "^18.3.11",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.16",
+    "typescript": "5.7.2"
   }
 }

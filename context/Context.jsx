@@ -11,8 +11,8 @@ export const useContextElement = () => {
 
 export default function Context({ children }) {
   const [cartProducts, setCartProducts] = useState([]);
-  const [wishList, setWishList] = useState([1, 2, 3]);
-  const [compareItem, setCompareItem] = useState([1, 2, 3]);
+  const [wishList, setWishList] = useState([]);
+  const [compareItem, setCompareItem] = useState([]);
   const [quickViewItem, setQuickViewItem] = useState(allProducts[0]);
   const [quickAddItem, setQuickAddItem] = useState(1);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -23,54 +23,76 @@ export default function Context({ children }) {
     setTotalPrice(subtotal);
   }, [cartProducts]);
 
-  const addProductToCart = (id, qty) => {
-    if (!cartProducts.filter((elm) => elm.id == id)[0]) {
+  const addProductToCart = (productData, id, qty) => {
+    // console.log(new Error().stack);
+    let finditem = cartProducts.some((item) => item.id === id);
+    // Check if the product with the given `id` is already in the `cartProducts` array
+    if (!finditem) {
+      // If the product is not in the cart, find the product details from the `allProducts` array
       const item = {
-        ...allProducts.filter((elm) => elm.id == id)[0],
-        quantity: qty ? qty : 1,
+        ...productData, // Spread the product's properties into a new object
+        quantity: qty ? qty : 1, // Add a `quantity` property, defaulting to 1 if `qty` is not provided
       };
+
+      // Add the new item to the cart by updating the `cartProducts` state
       setCartProducts((pre) => [...pre, item]);
+
+      // Open the cart modal to show the updated cart to the user
       openCartModal();
 
+      // Optionally, another function to handle additional cart opening logic (commented out here)
       // openCart();
     }
   };
+
   const isAddedToCartProducts = (id) => {
+    // console.log(new Error().stack);
     if (cartProducts.filter((elm) => elm.id == id)[0]) {
       return true;
     }
     return false;
   };
 
-  const addToWishlist = (id) => {
-    if (!wishList.includes(id)) {
-      setWishList((pre) => [...pre, id]);
+  const addToWishlist = (product, id) => {
+    // console.log(new Error().stack);
+    if (!wishList.some((item) => item.id === id)) {
+      setWishList((pre) => [...pre, product]);
     } else {
-      setWishList((pre) => [...pre].filter((elm) => elm != id));
+      setWishList((pre) => [...pre].filter((elm) => elm != id)); // Keep only the elements that are not equal to 'id(item)'
     }
   };
+
   const removeFromWishlist = (id) => {
-    if (wishList.includes(id)) {
-      setWishList((pre) => [...pre.filter((elm) => elm != id)]);
+    //  console.log(new Error().stack);
+    let itemExists = wishList.some((val) => val.id === id);
+    if (itemExists) {
+      setWishList(wishList.filter((val) => val.id !== id));
     }
   };
-  const addToCompareItem = (id) => {
-    if (!compareItem.includes(id)) {
-      setCompareItem((pre) => [...pre, id]);
+
+  const addToCompareItem = (id, product) => {
+    // console.log(new Error().stack);
+    let finditem = compareItem.some((item) => item.id === id);
+    if (!finditem) {
+      setCompareItem((pre) => [...pre, product]);
     }
   };
   const removeFromCompareItem = (id) => {
-    if (compareItem.includes(id)) {
-      setCompareItem((pre) => [...pre.filter((elm) => elm != id)]);
+    // console.log(new Error().stack);
+    let itemExists = compareItem.some((val) => val.id === id);
+    if (itemExists) {
+      setCompareItem(compareItem.filter((val) => val.id !== id));
     }
   };
   const isAddedtoWishlist = (id) => {
+    //  console.log(new Error().stack);
     if (wishList.includes(id)) {
       return true;
     }
     return false;
   };
   const isAddedtoCompareItem = (id) => {
+    // console.log(new Error().stack);
     if (compareItem.includes(id)) {
       return true;
     }

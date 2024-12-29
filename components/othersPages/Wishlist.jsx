@@ -10,10 +10,7 @@ export default function Wishlist() {
   const [wishListItems, setWishListItems] = useState([]);
   useEffect(() => {
     if (wishList) {
-      console.log(wishList);
-      setWishListItems(
-        [...allProducts].filter((el) => wishList.includes(el.id))
-      );
+      setWishListItems(wishList);
     }
   }, [wishList]);
 

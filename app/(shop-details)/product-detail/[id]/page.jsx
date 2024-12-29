@@ -1,6 +1,5 @@
 import Footer1 from "@/components/footers/Footer1";
 import Header2 from "@/components/headers/Header2";
-
 import Products from "@/components/shopDetails/Products";
 import RecentProducts from "@/components/shopDetails/RecentProducts";
 import ShopDetailsTab from "@/components/shopDetails/ShopDetailsTab";
@@ -13,9 +12,12 @@ export const metadata = {
 };
 import { allProducts } from "@/data/products";
 import ProductSinglePrevNext from "@/components/common/ProductSinglePrevNext";
-export default function page({ params }) {
-  const product =
-    allProducts.filter((elm) => elm.id == params.id)[0] || allProducts[0];
+import { fetchSingleProduct } from "@/utlis/ProductActionsAPIs/ProductsBasicActionsAPIs";
+export default async function page({ params }) {
+  // const product =
+  //   allProducts.filter((elm) => elm.id == params.id)[0] || allProducts[0];
+  let product = await fetchSingleProduct(params.id);
+  product = product[0];
   return (
     <>
       <Header2 />

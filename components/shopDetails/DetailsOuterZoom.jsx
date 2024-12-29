@@ -15,6 +15,7 @@ import Slider1ZoomOuter from "./sliders/Slider1ZoomOuter";
 import { allProducts } from "@/data/products";
 import { useContextElement } from "@/context/Context";
 import { openCartModal } from "@/utlis/openCartModal";
+import { getMediaUrlPath } from "@/lib/mediaUrl";
 
 export default function DetailsOuterZoom({ product = allProducts[0] }) {
   const [currentColor, setCurrentColor] = useState(colors[0]);
@@ -55,7 +56,7 @@ export default function DetailsOuterZoom({ product = allProducts[0] }) {
                   <Slider1ZoomOuter
                     handleColor={handleColor}
                     currentColor={currentColor.value}
-                    firstImage={product.imgSrc}
+                    firstImage={getMediaUrlPath(product.img_file)}
                   />
                 </div>
               </div>
@@ -80,7 +81,7 @@ export default function DetailsOuterZoom({ product = allProducts[0] }) {
                   </div>
                   <div className="tf-product-info-price">
                     <div className="price-on-sale">
-                      ${product.price.toFixed(2)}
+                      ${Number(product.price).toFixed(2)}
                     </div>
 
                     <div className="compare-at-price">
@@ -189,7 +190,11 @@ export default function DetailsOuterZoom({ product = allProducts[0] }) {
                       <a
                         onClick={() => {
                           openCartModal();
-                          addProductToCart(product.id, quantity ? quantity : 1);
+                          addProductToCart(
+                            product,
+                            product.id,
+                            quantity ? quantity : 1
+                          );
                         }}
                         className="tf-btn btn-fill justify-content-center fw-6 fs-16 flex-grow-1 animate-hover-btn"
                       >
@@ -200,7 +205,7 @@ export default function DetailsOuterZoom({ product = allProducts[0] }) {
                           -{" "}
                         </span>
                         <span className="tf-qty-price">
-                          ${(product.price * quantity).toFixed(2)}
+                          ${(Number(product.price) * quantity).toFixed(2)}
                         </span>
                       </a>
                       <a
@@ -365,8 +370,8 @@ export default function DetailsOuterZoom({ product = allProducts[0] }) {
             </div>
           </div>
         </div>
-      </div>{" "}
-      <StickyItem />
+      </div>
+      <StickyItem product={product} />
     </section>
   );
 }

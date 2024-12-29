@@ -9,6 +9,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import Quantity from "../shopDetails/Quantity";
 import { colors, sizeOptions } from "@/data/singleProductOptions";
 import React, { useState } from "react";
+import { getMediaUrlPath } from "@/lib/mediaUrl";
 
 export default function QuickView() {
   const {
@@ -68,12 +69,12 @@ export default function QuickView() {
                   {[
                     quickViewItem.isLookBookProduct
                       ? "/images/products/orange-1.jpg"
-                      : quickViewItem.imgSrc,
+                      : getMediaUrlPath(quickViewItem.img_file),
                     quickViewItem.isLookBookProduct
                       ? "/images/products/pink-1.jpg"
-                      : quickViewItem.imgHoverSrc
-                      ? quickViewItem.imgHoverSrc
-                      : quickViewItem.imgSrc,
+                      : getMediaUrlPath(quickViewItem.img_hover_file)
+                      ? getMediaUrlPath(quickViewItem.img_hover_file)
+                      : getMediaUrlPath(quickViewItem.img_file),
                   ].map((product, index) => (
                     <SwiperSlide className="swiper-slide" key={index}>
                       <div className="item">
@@ -115,7 +116,9 @@ export default function QuickView() {
                   </div>
                 </div>
                 <div className="tf-product-info-price">
-                  <div className="price">${quickViewItem.price.toFixed(2)}</div>
+                  <div className="price">
+                    ${Number(quickViewItem.price).toFixed(2)}
+                  </div>
                 </div>
                 <div className="tf-product-description">
                   <p>
@@ -204,7 +207,9 @@ export default function QuickView() {
                     <a
                       href="#"
                       className="tf-btn btn-fill justify-content-center fw-6 fs-16 flex-grow-1 animate-hover-btn"
-                      onClick={() => addProductToCart(quickViewItem.id)}
+                      onClick={() =>
+                        addProductToCart(quickViewItem, quickViewItem.id)
+                      }
                     >
                       <span>
                         {isAddedToCartProducts(quickViewItem.id)
@@ -212,11 +217,11 @@ export default function QuickView() {
                           : "Add to cart - "}
                       </span>
                       <span className="tf-qty-price">
-                        ${quickViewItem.price.toFixed(2)}
+                        ${Number(quickViewItem.price).toFixed(2)}
                       </span>
                     </a>
                     <a
-                      onClick={() => addToWishlist(quickViewItem.id)}
+                      onClick={() => addToWishlist(quickViewItem, quickViewItem.id)}
                       className="tf-product-btn-wishlist hover-tooltip box-icon bg_white wishlist btn-icon-action"
                     >
                       <span
@@ -235,7 +240,7 @@ export default function QuickView() {
                       href="#compare"
                       data-bs-toggle="offcanvas"
                       aria-controls="offcanvasLeft"
-                      onClick={() => addToCompareItem(quickViewItem.id)}
+                      onClick={() => addToCompareItem(quickViewItem.id, quickViewItem)}
                       className="tf-product-btn-wishlist hover-tooltip box-icon bg_white compare btn-icon-action"
                     >
                       <span

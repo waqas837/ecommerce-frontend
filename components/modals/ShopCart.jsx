@@ -1,14 +1,17 @@
 "use client";
 import { useContextElement } from "@/context/Context";
 import { products1 } from "@/data/products";
+import { getMediaUrlPath } from "@/lib/mediaUrl";
+import { fetchAllProductsWithLimit } from "@/utlis/ProductActionsAPIs/ProductsBasicActionsAPIs";
 import Image from "next/image";
 import Link from "next/link";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 export default function ShopCart() {
   const { cartProducts, totalPrice, setCartProducts, setQuickViewItem } =
     useContextElement();
+  const [alsoLike, setalsoLike] = useState([]);
   const setQuantity = (id, quantity) => {
     if (quantity >= 1) {
       const item = cartProducts.filter((elm) => elm.id == id)[0];
@@ -26,6 +29,15 @@ export default function ShopCart() {
   const addNoteRef = useRef();
   const addGiftRef = useRef();
   const addShipingRef = useRef();
+  useEffect(() => {
+    (async () => {
+      let response = await fetchAllProductsWithLimit(3);
+      let res = response.filter((elm) => {
+        return !cartProducts.some((item) => item.id === elm.id);
+      });
+      setalsoLike(res);
+    })();
+  }, []);
 
   return (
     <div className="modal fullRight fade modal-shopping-cart" id="shoppingCart">
@@ -74,7 +86,7 @@ export default function ShopCart() {
                           <Link href={`/product-detail/${elm.id}`}>
                             <Image
                               alt="image"
-                              src={elm.imgSrc}
+                              src={getMediaUrlPath(elm.img_file)}
                               width={668}
                               height={932}
                               style={{ objectFit: "cover" }}
@@ -90,7 +102,7 @@ export default function ShopCart() {
                           </Link>
                           <div className="meta-variant">Light gray</div>
                           <div className="price fw-6">
-                            ${elm.price?.toFixed(2)}
+                            ${Number(elm.price)?.toFixed(2)}
                           </div>
                           <div className="tf-mini-cart-btns">
                             <div className="wg-quantity small">
@@ -168,14 +180,14 @@ export default function ShopCart() {
                       }}
                       className="swiper tf-cart-slide"
                     >
-                      {products1.slice(0, 2).map((elm, i) => (
+                      {alsoLike.map((elm, i) => (
                         <SwiperSlide key={i} className="swiper-slide">
                           <div className="tf-minicart-recommendations-item">
                             <div className="tf-minicart-recommendations-item-image">
                               <Link href={`/product-detail/${elm.id}`}>
                                 <Image
                                   alt="image"
-                                  src={elm.imgSrc}
+                                  src={getMediaUrlPath(elm.img_file)}
                                   width={720}
                                   height={1005}
                                 />
@@ -189,7 +201,7 @@ export default function ShopCart() {
                                 {elm.title}
                               </Link>
                               <div className="price">
-                                ${elm.price.toFixed(2)}
+                                ${Number(elm.price).toFixed(2)}
                               </div>
                             </div>
                             <div className="tf-minicart-recommendations-item-quickview">

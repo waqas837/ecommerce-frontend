@@ -27,10 +27,11 @@ import NewsletterModal from "@/components/modals/NewsletterModal";
 import ShareModal from "@/components/modals/ShareModal";
 import ScrollTop from "@/components/common/ScrollTop";
 import RtlToggle from "@/components/common/RtlToggle";
-import "./globals.css"
+import "./globals.css";
 export default function RootLayout({ children }) {
   const pathname = usePathname();
-  const isAdminRoute = pathname.startsWith("/admin");
+  const isAdminRoute =
+    pathname.startsWith("/admin") || pathname.startsWith("/dashboard");
   useEffect(() => {
     if (typeof window !== "undefined") {
       // Import the script only on the client side

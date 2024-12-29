@@ -1,21 +1,21 @@
 export const slides = [
   {
-    imgSrc: "/images/slider/fashion-slideshow-01.jpg",
-    title: "Glamorous\nGlam",
-    text: "From casual to formal, we've got you covered",
-    btnText: "Shop collection",
+    imgSrc: "/images/brocoli.jpg",
+    title: "Fresh Broccoli",
+    text: "Packed with nutrients, perfect for any meal.",
+    btnText: "Shop Broccoli",
   },
   {
-    imgSrc: "/images/slider/fashion-slideshow-02.jpg",
-    title: "Simple\nStyle",
-    text: "From casual to formal, we've got you covered",
-    btnText: "Shop collection",
+    imgSrc: "/images/eggs.jpeg",
+    title: "Organic Eggs",
+    text: "Farm-fresh eggs for your healthy breakfast.",
+    btnText: "Shop Eggs",
   },
   {
-    imgSrc: "/images/slider/fashion-slideshow-03.jpg",
-    title: "Glamorous\nGlam",
-    text: "From casual to formal, we've got you covered",
-    btnText: "Shop collection",
+    imgSrc: "/images/orange.jpeg",
+    title: "Juicy Oranges",
+    text: "Bursting with flavor and Vitamin C.",
+    btnText: "Shop Oranges",
   },
 ];
 

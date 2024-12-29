@@ -4,12 +4,13 @@ import Link from "next/link";
 import Image from "next/image";
 import { useContextElement } from "@/context/Context";
 import { allProducts } from "@/data/products";
+import { getMediaUrlPath } from "@/lib/mediaUrl";
 export default function Compare() {
   const { removeFromCompareItem, compareItem, setCompareItem } =
     useContextElement();
   const [items, setItems] = useState([]);
   useEffect(() => {
-    setItems([...allProducts.filter((elm) => compareItem.includes(elm.id))]);
+    setItems(compareItem);
   }, [compareItem]);
 
   return (
@@ -47,7 +48,7 @@ export default function Compare() {
                             <Image
                               className="radius-3"
                               alt="image"
-                              src={elm.imgSrc}
+                              src={getMediaUrlPath(elm.img_file)}
                               style={{ objectFit: "contain" }}
                               width={720}
                               height={1005}

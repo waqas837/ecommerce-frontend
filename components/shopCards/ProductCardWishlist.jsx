@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useContextElement } from "@/context/Context";
 import CountdownComponent from "../common/Countdown";
+import { getMediaUrlPath } from "@/lib/mediaUrl";
 export const ProductCardWishlist = ({ product }) => {
   const [currentImage, setCurrentImage] = useState(product.imgSrc);
   const { setQuickViewItem } = useContextElement();
@@ -22,8 +23,16 @@ export const ProductCardWishlist = ({ product }) => {
         <Link href={`/product-detail/${product.id}`} className="product-img">
           <Image
             className="lazyload img-product"
-            data-src={product.imgSrc}
-            src={currentImage}
+            data-src={
+              product.img_hover_file
+                ? getMediaUrlPath(product.img_hover_file)
+                : getMediaUrlPath(product.img_file)
+            }
+            src={
+              product.img_hover_file
+                ? getMediaUrlPath(product.img_hover_file)
+                : getMediaUrlPath(product.img_file)
+            }
             alt="image-product"
             width={720}
             height={1005}
@@ -31,9 +40,15 @@ export const ProductCardWishlist = ({ product }) => {
           <Image
             className="lazyload img-hover"
             data-src={
-              product.imgHoverSrc ? product.imgHoverSrc : product.imgSrc
+              product.img_hover_file
+                ? getMediaUrlPath(product.img_hover_file)
+                : getMediaUrlPath(product.img_file)
             }
-            src={product.imgHoverSrc ? product.imgHoverSrc : product.imgSrc}
+            src={
+              product.img_file
+                ? getMediaUrlPath(product.img_file)
+                : getMediaUrlPath(product.img_hover_file)
+            }
             alt="image-product"
             width={720}
             height={1005}
@@ -60,7 +75,7 @@ export const ProductCardWishlist = ({ product }) => {
             <span className="tooltip">Quick Add</span>
           </a>
           <a
-            onClick={() => addToWishlist(product.id)}
+            onClick={() => addToWishlist(product.id, product)}
             className="box-icon bg_white wishlist btn-icon-action"
           >
             <span
@@ -79,7 +94,7 @@ export const ProductCardWishlist = ({ product }) => {
             href="#compare"
             data-bs-toggle="offcanvas"
             aria-controls="offcanvasLeft"
-            onClick={() => addToCompareItem(product.id)}
+            onClick={() => addToCompareItem(product.id, product)}
             className="box-icon bg_white compare btn-icon-action"
           >
             <span
@@ -112,20 +127,20 @@ export const ProductCardWishlist = ({ product }) => {
             </div>
           </div>
         )}
-        {product.sizes && (
+        {/* {product.sizes && (
           <div className="size-list">
             {product.sizes.map((size) => (
               <span key={size}>{size}</span>
             ))}
           </div>
-        )}
+        )} */}
       </div>
       <div className="card-product-info">
         <Link href={`/product-detail/${product.id}`} className="title link">
           {product.title}
         </Link>
-        <span className="price">${product.price.toFixed(2)}</span>
-        {product.colors && (
+        <span className="price">${Number(product.price).toFixed(2)}</span>
+        {/* {product.colors && (
           <ul className="list-color-product">
             {product.colors.map((color) => (
               <li
@@ -148,7 +163,7 @@ export const ProductCardWishlist = ({ product }) => {
               </li>
             ))}
           </ul>
-        )}
+        )} */}
       </div>
     </div>
   );

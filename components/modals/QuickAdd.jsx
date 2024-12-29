@@ -4,9 +4,10 @@ import Image from "next/image";
 import Link from "next/link";
 import Quantity from "../shopDetails/Quantity";
 import { useContextElement } from "@/context/Context";
-
 import { allProducts } from "@/data/products";
 import { colors, sizeOptions } from "@/data/singleProductOptions";
+import { apiUrl } from "@/lib/apiUrl";
+import axios from "axios";
 export default function QuickAdd() {
   const {
     quickAddItem,
@@ -15,13 +16,32 @@ export default function QuickAdd() {
     addToCompareItem,
     isAddedtoCompareItem,
   } = useContextElement();
-  const [item, setItem] = useState(allProducts[0]);
+  const [item, setItem] = useState([]);
+
   useEffect(() => {
-    const filtered = allProducts.filter((el) => el.id == quickAddItem);
-    if (filtered) {
-      setItem(filtered[0]);
+    // fetchSingleProduct();
+    console.log("quickAddItem", quickAddItem)
+  }, []);
+
+  const fetchSingleProduct = async () => {
+    try {
+      let { data } = await axios.get(
+        `${apiUrl}/admin/grocerry/get-grocery-products/${quickAddItem}`
+      );
+      if (data.success) {
+        setItem(data.products);
+      }
+    } catch (error) {
+      console.log("error", error);
     }
-  }, [quickAddItem]);
+  };
+
+  // useEffect(() => {
+  //   const filtered = allProducts.filter((el) => el.id == quickAddItem);
+  //   if (filtered) {
+  //     setItem(filtered[0]);
+  //   }
+  // }, [quickAddItem]);
   const [currentColor, setCurrentColor] = useState(colors[0]);
   const [currentSize, setCurrentSize] = useState(sizeOptions[0]);
 
@@ -47,10 +67,12 @@ export default function QuickAdd() {
                 />
               </div>
               <div className="content">
-                <Link href={`/product-detail/${item.id}`}>{item.title}</Link>
-                <div className="tf-product-info-price">
+                <Link href={`/product-detail/${item.id}`}>
+                  asdfasdf{item.title}
+                </Link>
+                {/* <div className="tf-product-info-price">
                   <div className="price">${item.price.toFixed(2)}</div>
-                </div>
+                </div> */}
               </div>
             </div>
             <div className="tf-product-info-variant-picker mb_15">
@@ -126,7 +148,7 @@ export default function QuickAdd() {
                       ? "Already Added - "
                       : "Add to cart - "}
                   </span>
-                  <span className="tf-qty-price">${item.price.toFixed(2)}</span>
+                  {/* <span className="tf-qty-price">${item.price.toFixed(2)}</span> */}
                 </a>
                 <div className="tf-product-btn-wishlist btn-icon-action">
                   <i className="icon-heart" />

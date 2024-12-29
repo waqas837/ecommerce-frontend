@@ -1,15 +1,37 @@
 "use client";
 import { layouts } from "@/data/shop";
 import ProductGrid from "./ProductGrid";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Pagination from "../common/Pagination";
 import ShopFilter from "./ShopFilter";
 import Sorting from "./Sorting";
+import axios from "axios";
+import { apiUrl } from "@/lib/apiUrl";
 
-export default function ShopDefault() {
+export default function ShopDefault({ categoryId }) {
   const [gridItems, setGridItems] = useState(4);
   const [products, setProducts] = useState([]);
   const [finalSorted, setFinalSorted] = useState([]);
+
+  useEffect(() => {
+    fetchProductsByCategory();
+  }, []);
+
+  const fetchProductsByCategory = async () => {
+    // categoryId
+    try {
+      let { data } = await axios.get(
+        `${apiUrl}/admin/grocerry/get-grocery-products-by-cateogry?limit=3&&categoryId=${categoryId}`
+      );
+      if (data.success) {
+        console.log("data we got", data)
+        setProducts(data.products);
+      }
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+
   return (
     <>
       <section className="flat-spacing-2">

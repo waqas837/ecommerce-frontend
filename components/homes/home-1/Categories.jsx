@@ -1,11 +1,31 @@
 "use client";
-import Image from "next/image";
 import Link from "next/link";
-import { collections } from "@/data/categories";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
+import { apiUrl } from "@/lib/apiUrl";
+import axios from "axios";
+import { getMediaUrlPath } from "@/lib/mediaUrl";
+import { collections } from "@/data/categories";
+
 export default function Categories() {
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+
+  const fetchCategories = async () => {
+    try {
+      const { data } = await axios.get(
+        `${apiUrl}/admin/grocerry/getGroceryCategory`
+      );
+      setCategories(data.categories);
+    } catch (error) {
+      console.error("Error fetching getGroceryCategory:", error);
+    }
+  };
+
   return (
     <section className="flat-spacing-4 flat-categorie">
       <div className="container-full">
@@ -50,29 +70,27 @@ export default function Categories() {
                 },
               }}
             >
-              {collections.map((item, index) => (
+              {categories.map((item, index) => (
                 <SwiperSlide className="swiper-slide" key={index}>
                   <div className="collection-item style-left hover-img">
                     <div className="collection-inner">
                       <Link
-                        href={`/shop-default`}
+                        href={`/shop-default/${item.id}`}
                         className="collection-image img-style"
                       >
-                        <Image
-                          className="lazyload"
+                        <img
+                          className="lazyload w-36 h-36"
                           data-src={item.imgSrc}
                           alt={item.altText}
-                          src={item.imgSrc}
-                          width="600"
-                          height="721"
+                          src={getMediaUrlPath(item.filePath)}
                         />
                       </Link>
                       <div className="collection-content">
                         <Link
-                          href={`/shop-default`}
+                          href={`/shop-default/${item.id}`}
                           className="tf-btn collection-title hover-icon fs-15"
                         >
-                          <span>{item.title}</span>
+                          <span>{item.name}</span>
                           <i className="icon icon-arrow1-top-left" />
                         </Link>
                       </div>

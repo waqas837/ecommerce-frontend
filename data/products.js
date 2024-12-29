@@ -1,3 +1,8 @@
+//    export const products1 = await fetch('https://api.example.com/products1')
+//   .then(response => response.json())
+//   .then(data => data)
+//   .catch(error => console.error('Error fetching products:', error));
+
 export const products1 = [
   {
     id: 1,

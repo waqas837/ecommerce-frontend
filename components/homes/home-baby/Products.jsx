@@ -89,7 +89,7 @@ export default function Products() {
                     </Link>
                     <div className="list-product-btn absolute-2">
                       <a
-                        onClick={() => addToWishlist(product.id)}
+                        onClick={() => addToWishlist(product.id, product)}
                         className="box-icon bg_white wishlist btn-icon-action"
                       >
                         <span
@@ -108,7 +108,7 @@ export default function Products() {
                         href="#compare"
                         data-bs-toggle="offcanvas"
                         aria-controls="offcanvasLeft"
-                        onClick={() => addToCompareItem(product.id)}
+                        onClick={() => addToCompareItem(product.id, product)}
                         className="box-icon bg_white compare btn-icon-action"
                       >
                         <span

@@ -7,7 +7,8 @@ export const metadata = {
   title: "Product Default || Ecomus - Ultimate Nextjs Ecommerce Template",
   description: "Ecomus - Ultimate Nextjs Ecommerce Template",
 };
-export default function page() {
+export default function page({ params }) {
+  let { categoryId } = params;
   return (
     <>
       <Header2 />
@@ -19,7 +20,7 @@ export default function page() {
           </p>
         </div>
       </div>
-      <ShopDefault />
+      <ShopDefault categoryId={categoryId} />
       <Footer1 />
     </>
   );

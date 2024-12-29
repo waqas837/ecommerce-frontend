@@ -5,8 +5,9 @@ import React from "react";
 import Quantity from "./Quantity";
 import { products4 } from "@/data/products";
 import { useContextElement } from "@/context/Context";
+import { getMediaUrlPath } from "@/lib/mediaUrl";
 
-export default function StickyItem({ soldOut = false }) {
+export default function StickyItem({ product, soldOut = false }) {
   const { addProductToCart, isAddedToCartProducts } = useContextElement();
   return (
     <div className="tf-sticky-btn-atc">
@@ -16,15 +17,15 @@ export default function StickyItem({ soldOut = false }) {
             <div className="tf-sticky-atc-img">
               <Image
                 className="lazyloaded"
-                data-src={products4[2].imgSrc}
+                data-src={getMediaUrlPath(product.img_file)}
                 alt="image"
-                src={products4[2].imgSrc}
+                src={getMediaUrlPath(product.img_file)}
                 width={770}
                 height={1075}
               />
             </div>
             <div className="tf-sticky-atc-title fw-5 d-xl-block d-none">
-              {products4[2].title}
+              {product.title}
             </div>
           </div>
           <div className="tf-sticky-atc-infos">
@@ -48,11 +49,11 @@ export default function StickyItem({ soldOut = false }) {
                   </a>
                 ) : (
                   <a
-                    onClick={() => addProductToCart(products4[2].id)}
+                    onClick={() => addProductToCart(product, product.id)}
                     className="tf-btn btn-fill radius-3 justify-content-center fw-6 fs-14 flex-grow-1 animate-hover-btn"
                   >
                     <span>
-                      {isAddedToCartProducts(products4[2].id)
+                      {isAddedToCartProducts(product.id)
                         ? "Already Added"
                         : "Add to cart"}
                     </span>

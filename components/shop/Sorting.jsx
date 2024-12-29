@@ -26,7 +26,6 @@ export default function Sorting({ products = products1, setFinalSorted }) {
 
   return (
     <>
-      {" "}
       <div className="btn-select">
         <span className="text-sort-value">{selectedOptions.text}</span>
         <span className="icon icon-arrow-down" />

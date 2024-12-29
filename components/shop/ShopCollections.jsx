@@ -1,14 +1,30 @@
-import React from "react";
 import Pagination from "../common/Pagination";
 import { collectionItems3 } from "@/data/categories";
 import Image from "next/image";
 import Link from "next/link";
-export default function ShopCollections() {
+import axios from "axios";
+import { apiUrl } from "@/lib/apiUrl";
+import { getMediaUrlPath } from "@/lib/mediaUrl";
+
+const fetchProducts = async () => {
+  try {
+    let { data } = await axios.get(
+      `${apiUrl}/admin/grocerry/get-grocery-products?limit=3`
+    );
+    if (data.success) {
+      return data.products;
+    }
+  } catch (error) {
+    console.log("error", error);
+  }
+};
+export default async function ShopCollections() {
+  const data = await fetchProducts();
   return (
     <section className="flat-spacing-1">
       <div className="container">
         <div className="tf-grid-layout lg-col-3 tf-col-2">
-          {collectionItems3.map((item, index) => (
+          {data.map((item, index) => (
             <div className="collection-item hover-img" key={index}>
               <div className="collection-inner">
                 <Link
@@ -19,7 +35,7 @@ export default function ShopCollections() {
                     className="lazyload"
                     data-src={item.imgSrc}
                     alt={item.alt}
-                    src={item.imgSrc}
+                    src={getMediaUrlPath(item.img_file)}
                     width={460}
                     height={460}
                   />

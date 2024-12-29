@@ -1,5 +1,6 @@
 "use client";
 import { useContextElement } from "@/context/Context";
+import { getMediaUrlPath } from "@/lib/mediaUrl";
 import Image from "next/image";
 import Link from "next/link";
 export default function Cart() {
@@ -71,7 +72,7 @@ export default function Cart() {
                         >
                           <Image
                             alt="img-product"
-                            src={elm.imgSrc}
+                            src={getMediaUrlPath(elm.img_file)}
                             width={668}
                             height={932}
                           />
@@ -97,7 +98,7 @@ export default function Cart() {
                         cart-data-title="Price"
                       >
                         <div className="cart-price">
-                          ${elm.price.toFixed(2)}
+                          ${Number(elm.price).toFixed(2)}
                         </div>
                       </td>
                       <td
@@ -158,7 +159,7 @@ export default function Cart() {
                           className="cart-total"
                           style={{ minWidth: "60px" }}
                         >
-                          ${(elm.price * elm.quantity).toFixed(2)}
+                          ${(Number(elm.price) * elm.quantity).toFixed(2)}
                         </div>
                       </td>
                     </tr>

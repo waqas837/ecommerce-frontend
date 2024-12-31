@@ -10,7 +10,7 @@ export const metadata = {
   title: "Shop Details || Ecomus - Ultimate Nextjs Ecommerce Template",
   description: "Ecomus - Ultimate Nextjs Ecommerce Template",
 };
-import { allProducts } from "@/data/products";
+// import { allProducts } from "@/data/products";
 import ProductSinglePrevNext from "@/components/common/ProductSinglePrevNext";
 import { fetchSingleProduct } from "@/utlis/ProductActionsAPIs/ProductsBasicActionsAPIs";
 export default async function page({ params }) {

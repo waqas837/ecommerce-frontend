@@ -8,6 +8,7 @@ import { allProducts } from "@/data/products";
 import { colors, sizeOptions } from "@/data/singleProductOptions";
 import { apiUrl } from "@/lib/apiUrl";
 import axios from "axios";
+import { getMediaUrlPath } from "@/lib/mediaUrl";
 export default function QuickAdd() {
   const {
     quickAddItem,
@@ -19,9 +20,8 @@ export default function QuickAdd() {
   const [item, setItem] = useState([]);
 
   useEffect(() => {
-    // fetchSingleProduct();
-    console.log("quickAddItem", quickAddItem)
-  }, []);
+    setItem(quickAddItem);
+  }, [quickAddItem]);
 
   const fetchSingleProduct = async () => {
     try {
@@ -61,15 +61,13 @@ export default function QuickAdd() {
                 <Image
                   alt="image"
                   style={{ objectFit: "contain" }}
-                  src={item.imgSrc}
+                  src={getMediaUrlPath(item.img_file)}
                   width={720}
                   height={1005}
                 />
               </div>
               <div className="content">
-                <Link href={`/product-detail/${item.id}`}>
-                  asdfasdf{item.title}
-                </Link>
+                <Link href={`/product-detail/${item.id}`}>{item.title}</Link>
                 {/* <div className="tf-product-info-price">
                   <div className="price">${item.price.toFixed(2)}</div>
                 </div> */}
@@ -141,7 +139,7 @@ export default function QuickAdd() {
               <form onSubmit={(e) => e.preventDefault()} className="">
                 <a
                   className="tf-btn btn-fill justify-content-center fw-6 fs-16 flex-grow-1 animate-hover-btn"
-                  onClick={() => addProductToCart(item.id)}
+                  onClick={() => addProductToCart(item, item.id)}
                 >
                   <span>
                     {isAddedToCartProducts(item.id)

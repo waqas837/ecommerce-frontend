@@ -79,10 +79,11 @@ export default function Categories() {
                         className="collection-image img-style"
                       >
                         <img
-                          className="lazyload w-36 h-36"
+                          className="lazyload w-36 h-36 rounded hover:rounded-lg"
                           data-src={item.imgSrc}
                           alt={item.altText}
                           src={getMediaUrlPath(item.filePath)}
+                          style={{ width: "300px", height: "300px" }}
                         />
                       </Link>
                       <div className="collection-content">

@@ -1,9 +1,7 @@
 "use client";
 import { useContextElement } from "@/context/Context";
-
 import Image from "next/image";
 import Link from "next/link";
-
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Quantity from "../shopDetails/Quantity";
@@ -43,9 +41,12 @@ export default function QuickView() {
       lastBackdrop.style.zIndex = "1057";
     }
   };
-
   return (
-    <div className="modal fade modalDemo" id="quick_view">
+    <div
+      className="modal fade modalDemo"
+      // style={{ border: "2px solid red" }}
+      id="quick_view"
+    >
       <div className="modal-dialog modal-dialog-centered">
         <div className="modal-content">
           <div className="header">
@@ -83,7 +84,11 @@ export default function QuickView() {
                           src={product}
                           width={720}
                           height={1045}
-                          style={{ objectFit: "contain" }}
+                          style={{
+                            // objectFit: "contain",
+                            // border: "2px solid blue",
+                            height: "500px",
+                          }}
                         />
                       </div>
                     </SwiperSlide>
@@ -97,7 +102,7 @@ export default function QuickView() {
             <div className="tf-product-info-wrap position-relative">
               <div className="tf-product-info-list">
                 <div className="tf-product-info-title">
-                  <h5>
+                  <h5 style={{ fontSize: "1.7rem" }}>
                     <Link
                       className="link"
                       href={`/product-detail/${quickViewItem.id}`}
@@ -221,7 +226,9 @@ export default function QuickView() {
                       </span>
                     </a>
                     <a
-                      onClick={() => addToWishlist(quickViewItem, quickViewItem.id)}
+                      onClick={() =>
+                        addToWishlist(quickViewItem, quickViewItem.id)
+                      }
                       className="tf-product-btn-wishlist hover-tooltip box-icon bg_white wishlist btn-icon-action"
                     >
                       <span
@@ -240,7 +247,9 @@ export default function QuickView() {
                       href="#compare"
                       data-bs-toggle="offcanvas"
                       aria-controls="offcanvasLeft"
-                      onClick={() => addToCompareItem(quickViewItem.id, quickViewItem)}
+                      onClick={() =>
+                        addToCompareItem(quickViewItem.id, quickViewItem)
+                      }
                       className="tf-product-btn-wishlist hover-tooltip box-icon bg_white compare btn-icon-action"
                     >
                       <span

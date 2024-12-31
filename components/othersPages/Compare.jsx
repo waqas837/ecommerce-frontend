@@ -1,6 +1,7 @@
 "use client";
 import { useContextElement } from "@/context/Context";
-import { allProducts, products1 } from "@/data/products";
+// import { allProducts, products1 } from "@/data/products";
+import { getMediaUrlPath } from "@/lib/mediaUrl";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
@@ -13,7 +14,7 @@ export default function Compare() {
     useContextElement();
   const [items, setItems] = useState([]);
   useEffect(() => {
-    setItems([...allProducts.filter((elm) => compareItem.includes(elm.id))]);
+    setItems(compareItem);
   }, [compareItem]);
 
   return (
@@ -39,11 +40,11 @@ export default function Compare() {
                     >
                       <Image
                         className="lazyload"
-                        data-src={elm.imgSrc}
+                        data-src={getMediaUrlPath(elm.img_file)}
                         alt="img-compare"
                         width={713}
                         height={1070}
-                        src={elm.imgSrc}
+                        src={getMediaUrlPath(elm.img_file)}
                       />
                     </Link>
                     <Link
@@ -54,7 +55,7 @@ export default function Compare() {
                     </Link>
                     <div className="price">
                       <span className="price-on-sale">
-                        ${elm.price.toFixed(2)}
+                        ${Number(elm.price).toFixed(2)}
                       </span>
                     </div>
                     <div className="tf-compare-group-btns d-flex gap-10">
@@ -71,7 +72,7 @@ export default function Compare() {
                         href="#quick_add"
                         data-bs-toggle="modal"
                         className="tf-btn btn-outline-dark radius-3"
-                        onClick={() => setQuickAddItem(elm.id)}
+                        onClick={() => setQuickAddItem(elm)}
                       >
                         <i className="icon icon-bag" />
                         <span>QUICK ADD</span>
@@ -93,7 +94,13 @@ export default function Compare() {
                   <div className="icon">
                     <i className="icon-check" />
                   </div>
-                  <span className="fw-5">In Stock</span>
+                  {elm.is_available === 1 ? (
+                    <span className="fw-5">In Stock</span>
+                  ) : (
+                    <span style={{ background: "red" }} className="fw-5">
+                      Out of Stock
+                    </span>
+                  )}
                 </div>
               ))}
             </div>

@@ -13,7 +13,7 @@ export default function Context({ children }) {
   const [cartProducts, setCartProducts] = useState([]);
   const [wishList, setWishList] = useState([]);
   const [compareItem, setCompareItem] = useState([]);
-  const [quickViewItem, setQuickViewItem] = useState(allProducts[0]);
+  const [quickViewItem, setQuickViewItem] = useState([]);
   const [quickAddItem, setQuickAddItem] = useState(1);
   const [totalPrice, setTotalPrice] = useState(0);
   useEffect(() => {
@@ -98,6 +98,7 @@ export default function Context({ children }) {
     }
     return false;
   };
+
   useEffect(() => {
     const items = JSON.parse(localStorage.getItem("cartList"));
     if (items?.length) {
@@ -108,6 +109,7 @@ export default function Context({ children }) {
   useEffect(() => {
     localStorage.setItem("cartList", JSON.stringify(cartProducts));
   }, [cartProducts]);
+
   useEffect(() => {
     const items = JSON.parse(localStorage.getItem("wishlist"));
     if (items?.length) {
@@ -139,6 +141,7 @@ export default function Context({ children }) {
     compareItem,
     setCompareItem,
   };
+  
   return (
     <dataContext.Provider value={contextElement}>
       {children}

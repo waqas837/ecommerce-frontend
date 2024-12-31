@@ -12,12 +12,12 @@ import StickyItem from "./StickyItem";
 import Quantity from "./Quantity";
 
 import Slider1ZoomOuter from "./sliders/Slider1ZoomOuter";
-import { allProducts } from "@/data/products";
+// import { allProducts } from "@/data/products";
 import { useContextElement } from "@/context/Context";
 import { openCartModal } from "@/utlis/openCartModal";
 import { getMediaUrlPath } from "@/lib/mediaUrl";
 
-export default function DetailsOuterZoom({ product = allProducts[0] }) {
+export default function DetailsOuterZoom({ product }) {
   const [currentColor, setCurrentColor] = useState(colors[0]);
   const [currentSize, setCurrentSize] = useState(sizeOptions[1]);
   const [quantity, setQuantity] = useState(1);
@@ -57,6 +57,7 @@ export default function DetailsOuterZoom({ product = allProducts[0] }) {
                     handleColor={handleColor}
                     currentColor={currentColor.value}
                     firstImage={getMediaUrlPath(product.img_file)}
+                    secondImage={getMediaUrlPath(product.img_hover_file)}
                   />
                 </div>
               </div>

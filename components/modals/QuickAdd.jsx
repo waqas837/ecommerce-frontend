@@ -21,20 +21,20 @@ export default function QuickAdd() {
 
   useEffect(() => {
     setItem(quickAddItem);
-  }, [quickAddItem]);
+  }, [item]);
 
-  const fetchSingleProduct = async () => {
-    try {
-      let { data } = await axios.get(
-        `${apiUrl}/admin/grocerry/get-grocery-products/${quickAddItem}`
-      );
-      if (data.success) {
-        setItem(data.products);
-      }
-    } catch (error) {
-      console.log("error", error);
-    }
-  };
+  // const fetchSingleProduct = async () => {
+  //   try {
+  //     let { data } = await axios.get(
+  //       `${apiUrl}/admin/grocerry/get-grocery-products/${quickAddItem}`
+  //     );
+  //     if (data.success) {
+  //       setItem(data.products);
+  //     }
+  //   } catch (error) {
+  //     console.log("error", error);
+  //   }
+  // };
 
   // useEffect(() => {
   //   const filtered = allProducts.filter((el) => el.id == quickAddItem);

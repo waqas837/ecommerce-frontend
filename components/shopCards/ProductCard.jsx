@@ -6,7 +6,7 @@ import { useContextElement } from "@/context/Context";
 import CountdownComponent from "../common/Countdown";
 import { getMediaUrlPath } from "@/lib/mediaUrl";
 import ProductModal from "../MyModals/ProductModal";
-import { fetchSingleProduct } from "@/utlis/ProductActionsAPIs/ProductsBasicActionsAPIs";
+// import { fetchSingleProduct } from "@/utlis/ProductActionsAPIs/ProductsBasicActionsAPIs";
 
 export const ProductCard = ({ product }) => {
   const [currentImage, setCurrentImage] = useState(product.imgSrc);

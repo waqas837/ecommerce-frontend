@@ -2,15 +2,19 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 const accountLinks = [
-  { href: "/my-account", label: "Dashboard" },
-  { href: "/my-account-orders", label: "Orders" },
-  { href: "/my-account-address", label: "Addresses" },
-  { href: "/my-account-edit", label: "Account Details" },
-  { href: "/my-account-wishlist", label: "Wishlist" },
+  { href: "/dashboard/my-account", label: "Dashboard" },
+  { href: "/dashboard/my-account-orders", label: "Orders" },
+  { href: "/dashboard/my-account-address", label: "Addresses" },
+  { href: "/dashboard/my-account-edit", label: "Account Details" },
+  { href: "/dashboard/my-account-wishlist", label: "Wishlist" },
 ];
 
 export default function DashboardNav() {
   const pathname = usePathname();
+  const logoutCustomer = () => {
+    localStorage.removeItem("userToken");
+    window.location.href = "/";
+  };
   return (
     <ul className="my-account-nav">
       {accountLinks.map((link, index) => (
@@ -26,9 +30,9 @@ export default function DashboardNav() {
         </li>
       ))}
       <li>
-        <Link href={`/login`} className="my-account-nav-item">
+        <button onClick={logoutCustomer} className="my-account-nav-item">
           Logout
-        </Link>
+        </button>
       </li>
     </ul>
   );

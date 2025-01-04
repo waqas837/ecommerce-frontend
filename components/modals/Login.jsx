@@ -1,12 +1,63 @@
 "use client";
-import React from "react";
+import { apiUrl } from "@/lib/apiUrl";
+import axios from "axios";
+import { Modal } from "bootstrap";
+import { useRouter } from "next/navigation";
+import React, { useRef, useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function Login() {
+  const modalRef = useRef(null);
+  const [data, setData] = useState({
+    email: "",
+    password: "",
+  });
+  const router = useRouter();
+  const signin = async (e) => {
+    toast.loading("Processing!");
+    e.preventDefault();
+    try {
+      let resp = await axios.post(`${apiUrl}/customerAuth/signin`, data);
+      let userData = resp.data;
+      // console.log("userData>>>>", userData.userDetails);
+      if (userData.status === "userExists") {
+        toast.dismiss();
+        toast.success("You are LoggedIn!");
+        // console.log("userData.token", userData.token)
+        localStorage.setItem("userToken", userData.token); // Store token
+        localStorage.setItem("customerName", userData.userDetails.username); // Store token
+        // Close the modal programmatically
+        router.push("/dashboard/my-account");
+        const modalElement = modalRef.current;
+        const bootstrapModal = Modal.getInstance(modalElement);
+        if (bootstrapModal) {
+          bootstrapModal.hide();
+        }
+      }
+      if (userData.status === "emailNotConfirmed") {
+        toast.dismiss();
+        toast.success("Your are already registered.Please confirm you email!");
+        return;
+      }
+      if (userData.status === "unauthorized") {
+        toast.dismiss();
+        toast.error("Please ensure correct email and password.");
+        return;
+      }
+    } catch (error) {
+      toast.dismiss();
+      toast.error("Internal server error!");
+      console.log("Error", error);
+    }
+  };
+
   return (
     <div
+      ref={modalRef}
       className="modal modalCentered fade form-sign-in modal-part-content"
       id="login"
     >
+      <Toaster />
       <div className="modal-dialog modal-dialog-centered">
         <div className="modal-content">
           <div className="header">
@@ -17,17 +68,15 @@ export default function Login() {
             />
           </div>
           <div className="tf-login-form">
-            <form
-              onSubmit={(e) => e.preventDefault()}
-              className=""
-              acceptCharset="utf-8"
-            >
+            <form onSubmit={signin} className="" acceptCharset="utf-8">
               <div className="tf-field style-1">
                 <input
                   className="tf-field-input tf-input"
                   placeholder=" "
                   type="email"
-                  name=""
+                  name="email"
+                  value={data.email}
+                  onChange={(e) => setData({ ...data, email: e.target.value })}
                   required
                   autoComplete="abc@xyz.com"
                 />
@@ -40,7 +89,11 @@ export default function Login() {
                   className="tf-field-input tf-input"
                   placeholder=" "
                   type="password"
-                  name=""
+                  name="password"
+                  value={data.password}
+                  onChange={(e) =>
+                    setData({ ...data, password: e.target.value })
+                  }
                   required
                   autoComplete="current-password"
                 />
@@ -63,7 +116,7 @@ export default function Login() {
                     type="submit"
                     className="tf-btn btn-fill animate-hover-btn radius-3 w-100 justify-content-center"
                   >
-                    <span>Log in</span>
+                    Log in
                   </button>
                 </div>
                 <div className="w-100">

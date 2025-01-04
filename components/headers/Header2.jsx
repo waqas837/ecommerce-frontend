@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import CartLength from "../common/CartLength";
 import WishlistLength from "../common/WishlistLength";
+import UserAccountIcon from "../NavbarClientComponents/Header/UserAccountIcon";
 export default function Header2({
   textClass,
   bgColor = "",
@@ -77,13 +78,7 @@ export default function Header2({
                 </a>
               </li>
               <li className="nav-account">
-                <a
-                  href="#login"
-                  data-bs-toggle="modal"
-                  className="nav-icon-item"
-                >
-                  <i className="icon icon-account" />
-                </a>
+                <UserAccountIcon />
               </li>
               <li className="nav-wishlist">
                 <Link href={`/wishlist`} className="nav-icon-item">

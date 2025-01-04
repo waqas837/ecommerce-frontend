@@ -554,27 +554,27 @@ export const pages = [
         className: "menu-link-text link text_black-2",
       },
       {
-        href: "/my-account-orders",
+        href: "/dashboard/my-account-orders",
         text: "My order",
         className: "menu-link-text link text_black-2",
       },
       {
-        href: "/my-account-orders-details",
+        href: "/dashboard/my-account-orders-details",
         text: "My order details",
         className: "menu-link-text link text_black-2",
       },
       {
-        href: "/my-account-address",
+        href: "/dashboard/my-account-address",
         text: "My address",
         className: "menu-link-text link text_black-2",
       },
       {
-        href: "/my-account-edit",
+        href: "/dashboard/my-account-edit",
         text: "My account details",
         className: "menu-link-text link text_black-2",
       },
       {
-        href: "/my-account-wishlist",
+        href: "/dashboard/my-account-wishlist",
         text: "My wishlist",
         className: "menu-link-text link text_black-2",
       },

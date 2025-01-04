@@ -22,7 +22,7 @@ export default function Orders() {
               <td>$200.0 for 1 items</td>
               <td>
                 <Link
-                  href={`/my-account-orders-details`}
+                  href={`/dashboard/my-account-orders-details`}
                   className="tf-btn btn-fill animate-hover-btn rounded-0 justify-content-center"
                 >
                   <span>View</span>
@@ -36,7 +36,7 @@ export default function Orders() {
               <td>$300.0 for 1 items</td>
               <td>
                 <Link
-                  href={`/my-account-orders-details`}
+                  href={`/dashboard/my-account-orders-details`}
                   className="tf-btn btn-fill animate-hover-btn rounded-0 justify-content-center"
                 >
                   <span>View</span>
@@ -50,7 +50,7 @@ export default function Orders() {
               <td>$400.0 for 1 items</td>
               <td>
                 <Link
-                  href={`/my-account-orders-details`}
+                  href={`/dashboard/my-account-orders-details`}
                   className="tf-btn btn-fill animate-hover-btn rounded-0 justify-content-center"
                 >
                   <span>View</span>

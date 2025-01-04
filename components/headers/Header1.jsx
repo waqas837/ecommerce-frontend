@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import CartLength from "../common/CartLength";
 import WishlistLength from "../common/WishlistLength";
+import UserAccountIcon from "../NavbarClientComponents/Header/UserAccountIcon";
 export default function Header1() {
   return (
     <header id="header" className="header-default header-absolute">
@@ -67,15 +68,7 @@ export default function Header1() {
                   <i className="icon icon-search" />
                 </a>
               </li>
-              <li className="nav-account">
-                <a
-                  href="#login"
-                  data-bs-toggle="modal"
-                  className="nav-icon-item"
-                >
-                  <i className="icon icon-account" />
-                </a>
-              </li>
+              <UserAccountIcon />
               <li className="nav-wishlist">
                 <Link href={`/wishlist`} className="nav-icon-item">
                   <i className="icon icon-heart" />

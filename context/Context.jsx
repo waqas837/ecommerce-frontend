@@ -2,7 +2,8 @@
 import Login from "@/components/modals/Login";
 import { allProducts } from "@/data/products";
 import { openCartModal } from "@/utlis/openCartModal";
-import { addItemToWishList } from "@/utlis/ProductActionsAPIs/ProductsBasicActionsAPIs";
+// import { addItemToWishList } from "@/utlis/ProductActionsAPIs/ProductsBasicActionsAPIs";
+import { addItemToWishList } from "../utlis/ProductActionsAPIs/ProductsBasicActionsAPIs";
 // import { openCart } from "@/utlis/toggleCart";
 import React, { useEffect } from "react";
 import { useContext, useState } from "react";
@@ -28,7 +29,10 @@ export default function Context({ children }) {
   }, [cartProducts]);
 
   useEffect(() => {
-    const items = JSON.parse(localStorage.getItem("cartList") || "[]");
+    const items = JSON.parse(
+      (typeof window !== "undefined" && localStorage.getItem("cartList")) ||
+        "[]"
+    );
     if (items?.length) {
       setCartProducts(items);
     }
@@ -39,22 +43,35 @@ export default function Context({ children }) {
   }, [cartProducts]);
 
   useEffect(() => {
-    const items = JSON.parse(localStorage.getItem("wishlist") || "[]");
+    const items = JSON.parse(
+      (typeof window !== "undefined" && localStorage.getItem("wishlist")) ||
+        "[]"
+    );
     setWishList(items);
   }, []);
 
   useEffect(() => {
-    const items = JSON.parse(localStorage.getItem("wishlist") || "[]");
+    let userid =
+      typeof window !== "undefined" && localStorage.getItem("userid");
+    let usertoken =
+      typeof window !== "undefined" && localStorage.getItem("userToken");
+    const items = JSON.parse(
+      (typeof window !== "undefined" && localStorage.getItem("wishlist")) ||
+        "[]"
+    );
     setWishListlength(items[userid]?.length || 0);
   }, [wishlistStateTracker]);
 
   const updateWishListLocalStorage = (wishList) => {
-    localStorage.setItem("wishlist", JSON.stringify(wishList));
+    typeof window !== "undefined" &&
+      localStorage.setItem("wishlist", JSON.stringify(wishList));
   };
 
-  let userid = localStorage.getItem("userid");
-  let usertoken = localStorage.getItem("userToken");
   const addProductToCart = (productData, id, qty) => {
+    let userid =
+      typeof window !== "undefined" && localStorage.getItem("userid");
+    let usertoken =
+      typeof window !== "undefined" && localStorage.getItem("userToken");
     // console.log(new Error().stack);
     let finditem = cartProducts.some((item) => item.id === id);
     // Check if the product with the given `id` is already in the `cartProducts` array
@@ -77,6 +94,10 @@ export default function Context({ children }) {
   };
 
   const isAddedToCartProducts = (id) => {
+    let userid =
+      typeof window !== "undefined" && localStorage.getItem("userid");
+    let usertoken =
+      typeof window !== "undefined" && localStorage.getItem("userToken");
     // console.log(new Error().stack);
     if (cartProducts.filter((elm) => elm.id == id)[0]) {
       return true;
@@ -85,6 +106,10 @@ export default function Context({ children }) {
   };
 
   const addToWishlist = async (product, id) => {
+    let userid =
+      typeof window !== "undefined" && localStorage.getItem("userid");
+    let usertoken =
+      typeof window !== "undefined" && localStorage.getItem("userToken");
     setwishlistStateTracker(!wishlistStateTracker);
     if (!usertoken) {
       return triggerLoginClick();
@@ -125,6 +150,10 @@ export default function Context({ children }) {
   };
 
   const removeFromWishlist = async (id) => {
+    let userid =
+      typeof window !== "undefined" && localStorage.getItem("userid");
+    let usertoken =
+      typeof window !== "undefined" && localStorage.getItem("userToken");
     setwishlistStateTracker(!wishlistStateTracker);
     if (!userid) {
       return triggerLoginClick();
@@ -159,6 +188,10 @@ export default function Context({ children }) {
     }
   };
   const isAddedtoWishlist = (id) => {
+    let userid =
+      typeof window !== "undefined" && localStorage.getItem("userid");
+    let usertoken =
+      typeof window !== "undefined" && localStorage.getItem("userToken");
     // Check if the user's wishlist exists and if the product is in the wishlist
     let alreadyAdded =
       wishList && wishList[userid]?.some((val) => val.id === id);

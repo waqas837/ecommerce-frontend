@@ -2,7 +2,7 @@
 import { apiUrl } from "@/lib/apiUrl";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import "@/app/globals.css";
+ 
 
 export default function RootLayout({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);

@@ -8,7 +8,7 @@ import Link from "next/link";
 export default function Wishlist() {
   const { wishList } = useContextElement();
   const [wishListItems, setWishListItems] = useState([]);
-  let userid = localStorage.getItem("userid");
+  // let userid = localStorage.getItem("userid");
 
   useEffect(() => {
     if (wishList) {
@@ -20,11 +20,15 @@ export default function Wishlist() {
     <section className="flat-spacing-2">
       <div className="container">
         <div className="grid-layout wrapper-shop" data-grid="grid-4">
-          {wishListItems[userid]?.map((elm, i) => (
+          {wishListItems[
+            typeof window !== "undefined" && localStorage.getItem("userid")
+          ]?.map((elm, i) => (
             <ProductCardWishlist key={i} product={elm} />
           ))}
         </div>
-        {!wishListItems[userid]?.length && (
+        {!wishListItems[
+          typeof window !== "undefined" && localStorage.getItem("userid")
+        ]?.length && (
           <>
             <div
               className="row align-items-center w-100"

@@ -1,7 +1,7 @@
 "use client";
 import { apiUrl } from "@/lib/apiUrl";
 import axios from "axios";
-import { Modal } from "bootstrap";
+// import { Modal } from "bootstrap";
 import { useRouter } from "next/navigation";
 import React, { useRef, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
@@ -29,11 +29,11 @@ export default function Login() {
         localStorage.setItem("userid", userData.userDetails.id); // Store token
         // Close the modal programmatically
         router.push("/dashboard/my-account");
-        const modalElement = modalRef.current;
-        const bootstrapModal = Modal.getInstance(modalElement);
-        if (bootstrapModal) {
-          bootstrapModal.hide();
-        }
+        // const modalElement = modalRef.current;
+        // const bootstrapModal = Modal.getInstance(modalElement);
+        // if (bootstrapModal) {
+        //   bootstrapModal.hide();
+        // }
       }
       if (userData.status === "emailNotConfirmed") {
         toast.dismiss();

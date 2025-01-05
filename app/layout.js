@@ -27,7 +27,7 @@ import NewsletterModal from "@/components/modals/NewsletterModal";
 import ShareModal from "@/components/modals/ShareModal";
 import ScrollTop from "@/components/common/ScrollTop";
 import RtlToggle from "@/components/common/RtlToggle";
-import "./globals.css";
+
 export default function RootLayout({ children }) {
   const pathname = usePathname();
   const isAdminRoute =
@@ -154,9 +154,6 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="en">
-      <head>
-        <link rel="manifest" href="/manifest.json" />
-      </head>
       <body className="preload-wrapper">
         <div className="preload preload-container" id="preloader">
           <div className="preload-logo">

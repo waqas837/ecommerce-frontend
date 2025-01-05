@@ -9,22 +9,21 @@ import { useEffect, useState } from "react";
 export default function Wishlist() {
   const { wishList } = useContextElement();
   const [wishListItems, setWishListItems] = useState([]);
+  let userid = localStorage.getItem("userid");
   useEffect(() => {
     if (wishList) {
-      setWishListItems(
-        [...allProducts].filter((el) => wishList.includes(el.id))
-      );
+      setWishListItems(wishList);
     }
   }, [wishList]);
   return (
     <div className="my-account-content account-wishlist">
       <div className="grid-layout wrapper-shop" data-grid="grid-3">
         {/* card product 1 */}
-        {wishListItems.slice(0, 3).map((elm, i) => (
+        {wishListItems[userid]?.map((elm, i) => (
           <ProductCardWishlist product={elm} key={i} />
         ))}
       </div>
-      {!wishListItems.length && (
+      {!wishListItems[userid]?.length && (
         <>
           <div
             className="row align-items-center w-100"
@@ -35,7 +34,7 @@ export default function Wishlist() {
             </div>
             <div className="col-lg-3  col-md-6">
               <Link
-                href={`/shop-default`}
+                href={`/`}
                 className="tf-btn btn-fill animate-hover-btn radius-3 w-100 justify-content-center"
               >
                 Explore Products!

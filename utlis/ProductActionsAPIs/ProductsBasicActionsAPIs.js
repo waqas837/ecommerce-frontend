@@ -42,3 +42,25 @@ export const fetchSingleProduct = async (productid) => {
     return error;
   }
 };
+
+// Customer Related APIs
+export const addItemToWishList = async (product) => {
+  try {
+    const userToken = localStorage.getItem("userToken");
+    let { data } = await axios.post(
+      `${apiUrl}/customerDashboard/addItemToWishList`,
+      { product },
+      {
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+        },
+      }
+    );
+    if (data.success) {
+      return data.products;
+    }
+  } catch (error) {
+    console.error("Error fetching product:", error);
+    return error;
+  }
+};

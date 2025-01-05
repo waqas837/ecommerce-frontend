@@ -18,6 +18,7 @@ export const ProductCard = ({ product }) => {
     isAddedtoWishlist,
     addToCompareItem,
     isAddedtoCompareItem,
+    removeFromWishlist,
   } = useContextElement();
   useEffect(() => {
     setCurrentImage(product.imgSrc);
@@ -58,6 +59,7 @@ export const ProductCard = ({ product }) => {
               alt="image-product"
               width={720}
               height={1005}
+              style={{ width: "250px", height: "150px" }}
             />
             <Image
               className="lazyload img-hover"
@@ -78,14 +80,20 @@ export const ProductCard = ({ product }) => {
           </Link>
           <div className="list-product-btn">
             <a
-              onClick={() => addProductModal(product)}
+              href="#quick_add"
+              onClick={() => setQuickAddItem(product)}
+              data-bs-toggle="modal"
               className="box-icon bg_white quick-add tf-btn-loading"
             >
               <span className="icon icon-bag" />
               <span className="tooltip">Quick Add</span>
             </a>
             <a
-              onClick={() => addToWishlist(product, product.id)}
+              onClick={() => {
+                isAddedtoWishlist(product.id)
+                  ? removeFromWishlist(product.id)
+                  : addToWishlist(product, product.id);
+              }}
               className="box-icon bg_white wishlist btn-icon-action"
             >
               <span

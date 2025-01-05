@@ -26,6 +26,7 @@ export default function Login() {
         // console.log("userData.token", userData.token)
         localStorage.setItem("userToken", userData.token); // Store token
         localStorage.setItem("customerName", userData.userDetails.username); // Store token
+        localStorage.setItem("userid", userData.userDetails.id); // Store token
         // Close the modal programmatically
         router.push("/dashboard/my-account");
         const modalElement = modalRef.current;

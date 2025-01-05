@@ -17,31 +17,8 @@ export default function QuickAdd() {
     addToCompareItem,
     isAddedtoCompareItem,
   } = useContextElement();
-  const [item, setItem] = useState([]);
 
-  useEffect(() => {
-    setItem(quickAddItem);
-  }, [item]);
-
-  // const fetchSingleProduct = async () => {
-  //   try {
-  //     let { data } = await axios.get(
-  //       `${apiUrl}/admin/grocerry/get-grocery-products/${quickAddItem}`
-  //     );
-  //     if (data.success) {
-  //       setItem(data.products);
-  //     }
-  //   } catch (error) {
-  //     console.log("error", error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   const filtered = allProducts.filter((el) => el.id == quickAddItem);
-  //   if (filtered) {
-  //     setItem(filtered[0]);
-  //   }
-  // }, [quickAddItem]);
+  let item = quickAddItem;
   const [currentColor, setCurrentColor] = useState(colors[0]);
   const [currentSize, setCurrentSize] = useState(sizeOptions[0]);
 

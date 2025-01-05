@@ -1,6 +1,8 @@
 "use client";
+import Login from "@/components/modals/Login";
 import { allProducts } from "@/data/products";
 import { openCartModal } from "@/utlis/openCartModal";
+import { addItemToWishList } from "@/utlis/ProductActionsAPIs/ProductsBasicActionsAPIs";
 // import { openCart } from "@/utlis/toggleCart";
 import React, { useEffect } from "react";
 import { useContext, useState } from "react";
@@ -12,10 +14,12 @@ export const useContextElement = () => {
 export default function Context({ children }) {
   const [cartProducts, setCartProducts] = useState([]);
   const [wishList, setWishList] = useState([]);
+  const [wishListlength, setWishListlength] = useState(0);
   const [compareItem, setCompareItem] = useState([]);
   const [quickViewItem, setQuickViewItem] = useState([]);
   const [quickAddItem, setQuickAddItem] = useState(1);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [wishlistStateTracker, setwishlistStateTracker] = useState(false);
   useEffect(() => {
     const subtotal = cartProducts.reduce((accumulator, product) => {
       return accumulator + product.quantity * product.price;
@@ -23,6 +27,33 @@ export default function Context({ children }) {
     setTotalPrice(subtotal);
   }, [cartProducts]);
 
+  useEffect(() => {
+    const items = JSON.parse(localStorage.getItem("cartList") || "[]");
+    if (items?.length) {
+      setCartProducts(items);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("cartList", JSON.stringify(cartProducts));
+  }, [cartProducts]);
+
+  useEffect(() => {
+    const items = JSON.parse(localStorage.getItem("wishlist") || "[]");
+    setWishList(items);
+  }, []);
+
+  useEffect(() => {
+    const items = JSON.parse(localStorage.getItem("wishlist") || "[]");
+    setWishListlength(items[userid]?.length || 0);
+  }, [wishlistStateTracker]);
+
+  const updateWishListLocalStorage = (wishList) => {
+    localStorage.setItem("wishlist", JSON.stringify(wishList));
+  };
+
+  let userid = localStorage.getItem("userid");
+  let usertoken = localStorage.getItem("userToken");
   const addProductToCart = (productData, id, qty) => {
     // console.log(new Error().stack);
     let finditem = cartProducts.some((item) => item.id === id);
@@ -53,20 +84,63 @@ export default function Context({ children }) {
     return false;
   };
 
-  const addToWishlist = (product, id) => {
-    // console.log(new Error().stack);
-    if (!wishList.some((item) => item.id === id)) {
-      setWishList((pre) => [...pre, product]);
+  const addToWishlist = async (product, id) => {
+    setwishlistStateTracker(!wishlistStateTracker);
+    if (!usertoken) {
+      return triggerLoginClick();
+    }
+
+    if (!wishList) {
+      let itemList = { [userid]: [product] };
+      setWishList(itemList);
+      updateWishListLocalStorage(itemList);
+    } else if (!wishList[userid]?.some((item) => item.id === id)) {
+      // Note: Invalid syntax is not iterable. So Keep the syntax correct.
+      setWishList((prev) => {
+        // If the wishlist already contains this user, update it
+        if (prev[userid]) {
+          if (!prev[userid].some((item) => item.id === id)) {
+            let itemList = { ...prev, [userid]: [...prev[userid], product] };
+            updateWishListLocalStorage(itemList);
+            return itemList;
+          } else {
+            let itemList = {
+              ...prev,
+              [userid]: prev[userid].filter((item) => item.id !== id),
+            };
+            return itemList;
+          }
+        } else {
+          // If no wishlist exists for the user, create one
+          let itemList = { ...prev, [userid]: [product] };
+          updateWishListLocalStorage(itemList);
+          return itemList;
+        }
+      });
+
+      // await addItemToWishList(product);
     } else {
-      setWishList((pre) => [...pre].filter((elm) => elm != id)); // Keep only the elements that are not equal to 'id(item)'
+      setWishList((pre) => pre && [...pre].filter((elm) => elm != id)); // Keep only the elements that are not equal to 'id(item)'
     }
   };
 
-  const removeFromWishlist = (id) => {
-    //  console.log(new Error().stack);
-    let itemExists = wishList.some((val) => val.id === id);
+  const removeFromWishlist = async (id) => {
+    setwishlistStateTracker(!wishlistStateTracker);
+    if (!userid) {
+      return triggerLoginClick();
+    }
+    // Check if the user's wishlist exists and if the product is in the wishlist
+
+    let itemExists = wishList[userid]?.some((val) => val.id === id);
     if (itemExists) {
-      setWishList(wishList.filter((val) => val.id !== id));
+      setWishList((prevWishList) => {
+        let listItems = {
+          ...prevWishList,
+          [userid]: prevWishList[userid].filter((val) => val.id !== id),
+        };
+        updateWishListLocalStorage(listItems);
+        return listItems;
+      });
     }
   };
 
@@ -85,41 +159,36 @@ export default function Context({ children }) {
     }
   };
   const isAddedtoWishlist = (id) => {
-    //  console.log(new Error().stack);
-    if (wishList.includes(id)) {
-      return true;
-    }
-    return false;
+    // Check if the user's wishlist exists and if the product is in the wishlist
+    let alreadyAdded =
+      wishList && wishList[userid]?.some((val) => val.id === id);
+
+    return alreadyAdded || false; // Returns true if the product is already added, otherwise false
   };
+
   const isAddedtoCompareItem = (id) => {
     // console.log(new Error().stack);
-    if (compareItem.includes(id)) {
+    let isItemCompare = compareItem.some((item) => item.id === id);
+    if (isItemCompare) {
       return true;
     }
     return false;
   };
+  const triggerLoginClick = () => {
+    const element = document.createElement("a");
+    element.href = "#login";
+    element.dataset.bsToggle = "modal";
+    element.className = "nav-icon-item";
+    element.innerHTML = '<i class="icon icon-account"></i>';
+    document.body.appendChild(element);
+    element.click(); // Programmatically trigger the click
+    element.remove(); // Clean up the DOM
+  };
 
-  useEffect(() => {
-    const items = JSON.parse(localStorage.getItem("cartList"));
-    if (items?.length) {
-      setCartProducts(items);
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("cartList", JSON.stringify(cartProducts));
-  }, [cartProducts]);
-
-  useEffect(() => {
-    const items = JSON.parse(localStorage.getItem("wishlist"));
-    if (items?.length) {
-      setWishList(items);
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("wishlist", JSON.stringify(wishList));
-  }, [wishList]);
+  // u
+  // useEffect(() => {
+  //   localStorage.setItem("wishlist", JSON.stringify(wishList));
+  // }, [wishList]);
 
   const contextElement = {
     cartProducts,
@@ -140,8 +209,9 @@ export default function Context({ children }) {
     removeFromCompareItem,
     compareItem,
     setCompareItem,
+    wishListlength,
   };
-  
+
   return (
     <dataContext.Provider value={contextElement}>
       {children}

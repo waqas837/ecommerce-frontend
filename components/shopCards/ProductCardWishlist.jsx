@@ -6,7 +6,6 @@ import { useContextElement } from "@/context/Context";
 import CountdownComponent from "../common/Countdown";
 import { getMediaUrlPath } from "@/lib/mediaUrl";
 export const ProductCardWishlist = ({ product }) => {
-  const [currentImage, setCurrentImage] = useState(product.imgSrc);
   const { setQuickViewItem } = useContextElement();
   const {
     setQuickAddItem,
@@ -36,6 +35,7 @@ export const ProductCardWishlist = ({ product }) => {
             alt="image-product"
             width={720}
             height={1005}
+            style={{ width: "250px", height: "150px" }}
           />
           <Image
             className="lazyload img-hover"
@@ -67,7 +67,7 @@ export const ProductCardWishlist = ({ product }) => {
         <div className="list-product-btn">
           <a
             href="#quick_add"
-            onClick={() => setQuickAddItem(product.id)}
+            onClick={() => setQuickAddItem(product)}
             data-bs-toggle="modal"
             className="box-icon bg_white quick-add tf-btn-loading"
           >
@@ -75,7 +75,11 @@ export const ProductCardWishlist = ({ product }) => {
             <span className="tooltip">Quick Add</span>
           </a>
           <a
-            onClick={() => addToWishlist(product.id, product)}
+            onClick={() =>
+              isAddedtoWishlist(product.id)
+                ? removeFromWishlist(product.id)
+                : addToWishlist(product, product.id)
+            }
             className="box-icon bg_white wishlist btn-icon-action"
           >
             <span

@@ -18,6 +18,7 @@ export default function QuickView() {
     isAddedtoWishlist,
     addToCompareItem,
     isAddedtoCompareItem,
+    removeFromWishlist,
   } = useContextElement();
   const [currentColor, setCurrentColor] = useState(colors[0]);
   const [currentSize, setCurrentSize] = useState(sizeOptions[0]);
@@ -227,7 +228,9 @@ export default function QuickView() {
                     </a>
                     <a
                       onClick={() =>
-                        addToWishlist(quickViewItem, quickViewItem.id)
+                        isAddedtoWishlist(quickViewItem.id)
+                          ? removeFromWishlist(quickViewItem.id)
+                          : addToWishlist(quickViewItem, quickViewItem.id)
                       }
                       className="tf-product-btn-wishlist hover-tooltip box-icon bg_white wishlist btn-icon-action"
                     >

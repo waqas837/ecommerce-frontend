@@ -137,7 +137,9 @@ const ProductModal = ({
             onClick={() => addProductToCart(productData, productData.id)}
             className="flex-1 bg-black text-white py-3 rounded"
           >
-            Add to cart
+            {isAddedToCartProducts(productData.id)
+              ? "Already Added"
+              : "Add to Cart"}
           </button>
           <button className="w-12 h-12 flex items-center justify-center border border-gray-300 rounded">
             <svg

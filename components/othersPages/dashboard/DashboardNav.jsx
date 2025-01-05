@@ -13,6 +13,10 @@ export default function DashboardNav() {
   const pathname = usePathname();
   const logoutCustomer = () => {
     localStorage.removeItem("userToken");
+    localStorage.removeItem("customerName");
+    localStorage.removeItem("userid");
+    localStorage.setItem("cartList",[]);
+    localStorage.setItem("wishlist",[]);
     window.location.href = "/";
   };
   return (

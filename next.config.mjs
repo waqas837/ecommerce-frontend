@@ -6,7 +6,9 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        hostname: "vidmate.drawsketch.co",
+        // hostname: "vidmate.drawsketch.co",
+        hostname: "localhost",
+        port:"1000"
       },
     ],
   },

@@ -1,5 +1,6 @@
 "use client";
 import { useContextElement } from "@/context/Context";
+import { getMediaUrlPath } from "@/lib/mediaUrl";
 import Image from "next/image";
 import Link from "next/link";
 export default function Checkout() {
@@ -214,7 +215,7 @@ export default function Checkout() {
                       <figure className="img-product">
                         <Image
                           alt="product"
-                          src={elm.imgSrc}
+                          src={getMediaUrlPath(elm.img_file)}
                           width={720}
                           height={1005}
                         />

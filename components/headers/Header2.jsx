@@ -77,9 +77,7 @@ export default function Header2({
                   <i className="icon icon-search" />
                 </a>
               </li>
-              <li className="nav-account">
-                <UserAccountIcon />
-              </li>
+              <UserAccountIcon />
               <li className="nav-wishlist">
                 <Link href={`/wishlist`} className="nav-icon-item">
                   <i className="icon icon-heart" />
